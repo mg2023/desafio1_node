@@ -1,23 +1,41 @@
 const fs = require('fs')
 
-
+/*Crear archivos con el módulo File System (3 Puntos)*/
 function registrar(nombre, edad, animal, color, enfermedad) {
-    const paciente = [
-        { nombre: nombre ,
-         edad: edad ,
-         animal: animal ,
-         color: color ,
-         enfermedad: enfermedad  }
-        ]
+    if (nombre, edad, animal, color, enfermedad) {
+        const templateCitas = {
+            nombre, edad, animal, color, enfermedad
+        }
 
-        fs.appendFileSync('paciente.json', JSON.stringify(paciente) )
-    return "ok";
-  }
+        try {
+            const citas = JSON.parse(fs.readFileSync('citas.json', 'utf-8'))
+            citas.push(templateCitas)
+            fs.writeFileSync('citas.json', JSON.stringify(citas))
+            console.log('La cita ha sido agregada para ' + nombre)
+        } catch (error) {
+            const crearArreglo = '[]'
+            fs.writeFileSync('citas.json', crearArreglo)
+            console.log('archivo creado')
+            const citas = JSON.parse(fs.readFileSync('citas.json', 'utf-8'))
+            citas.push(templateCitas)
+            fs.writeFileSync('citas.json', JSON.stringify(citas))
+            console.log('La cita ha sido agregada para ' + nombre)
+        }
+    } else {
+        console.log('faltan parametros')
+    }
+}
 
-function leer (){
-    const pacientes = fs.readFileSync('paciente.json', 'utf8')
-    console.log(pacientes)
+/* Leer archivos con el módulo File System (2 Puntos) */
+function leer() {
+    try {
+        const citas = JSON.parse(fs.readFileSync('citas.json', 'utf-8'))
+        console.log(citas)
+    }
+    catch (error) {
+        console.log("No hay citas registradas")
+    }
 }
 
 
-  module.exports = { registrar, leer }
+module.exports = { registrar, leer }

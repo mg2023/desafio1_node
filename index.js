@@ -1,5 +1,8 @@
+/* 4. Importar y exportar módulos en Node Js (1 Punto) */
 const { registrar, leer } = require('./operaciones.js')
 
+
+/*5. Utilizar argumentos escritos por línea de comandos (2 Punto) */
 const argumentos = process.argv.slice(2)
 const operacion = argumentos[0]
 
